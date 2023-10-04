@@ -6,28 +6,61 @@ public class Job {
 
     private int id;
     private static int nextId = 1;
+
     private String name;
     private Employer employer;
     private Location location;
     private PositionType positionType;
     private CoreCompetency coreCompetency;
 
-    public int getId() {
+    // TODO: Add two constructors - one to initialize a unique ID and a second to initialize the
+    //  other five fields. The second constructor should also call the first in order to initialize
+    //  the 'id' field.
+
+    // Constructor that assigns new unique updated ID
+    public Job(){
+        id = nextId;
+        nextId++;
+    }
+
+    // Constructor that initializes the five fields and includes new ID constructor
+    public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency) {
+        this();
+        this.name = name;
+        this.employer = employer;
+        this.location = location;
+        this.positionType = positionType;
+        this.coreCompetency = coreCompetency;
+    }
+
+
+    // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
+    //  match.
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        // Casting
+        Job job = (Job) o;
+        return id == job.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+
+    // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
+    //  and id.
+
+    // GETTER FOR id
+    public int getId(){
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public static int getNextId() {
-        return nextId;
-    }
-
-    public static void setNextId(int nextId) {
-        Job.nextId = nextId;
-    }
-
+    // GETTERS AND SETTERS FOR name, employer, location, positionType, coreCompetency
     public String getName() {
         return name;
     }
@@ -64,54 +97,27 @@ public class Job {
         return coreCompetency;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Job job)) return false;
-        return getId() == job.getId();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getId());
-    }
-
     public void setCoreCompetency(CoreCompetency coreCompetency) {
         this.coreCompetency = coreCompetency;
     }
 
-    public Job() {
-        id = nextId;
-        nextId++;
-    }
-
-    public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency) {
-        this();
-        this.name = name;
-        this.employer = employer;
-        this.location = location;
-        this.positionType = positionType;
-        this.coreCompetency = coreCompetency;
-    }
+    // TODO: Create custom toString method for TDD Task
     @Override
     public String toString() {
-        return lineSeparator() + "ID: " + getId() + lineSeparator() +
-                "Name: " + getName() + lineSeparator() +
-                "Employer: " + getEmployer() + lineSeparator() +
-                "Location: " + getLocation() + lineSeparator() +
-                "Position Type: " + getPositionType() + lineSeparator() +
-                "Core Competency: " + getCoreCompetency() + lineSeparator();
+
+        String jobName = ((name != null && !name.isEmpty()) ? name : "Data not available");
+        String jobEmployer = ((employer.getValue() != null && !employer.getValue().isEmpty()) ? employer.getValue() : "Data not available");
+        String jobLocation = ((location.getValue() != null && !location.getValue().isEmpty()) ? location.getValue() : "Data not available");
+        String jobPositionType = ((positionType.getValue() != null && !positionType.getValue().isEmpty()) ? positionType.getValue() : "Data not available");
+        String jobCoreCompetency = ((coreCompetency.getValue() != null && !coreCompetency.getValue().isEmpty()) ? coreCompetency.getValue() : "Data not available");
+
+        return System.lineSeparator() +
+                "ID: " + id + System.lineSeparator() +
+                "Name: " + jobName + System.lineSeparator() +
+                "Employer: " + jobEmployer + System.lineSeparator() +
+                "Location: " + jobLocation + System.lineSeparator() +
+                "Position Type: " + jobPositionType + System.lineSeparator() +
+                "Core Competency: " + jobCoreCompetency +
+                System.lineSeparator();
     }
-
 }
-
-    // TODO: Add two constructors - one to initialize a unique ID and a second to initialize the
-    //  other five fields. The second constructor should also call the first in order to initialize
-    //  the 'id' field.
-
-    // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
-    //  match.
-
-    // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
-    //  and id.
-
