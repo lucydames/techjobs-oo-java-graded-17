@@ -93,6 +93,16 @@ public class Job {
         this.positionType = positionType;
         this.coreCompetency = coreCompetency;
     }
+    @Override
+    public String toString() {
+        return lineSeparator() + "ID: " + getId() + lineSeparator() +
+                "Name: " + getName() + lineSeparator() +
+                "Employer: " + getEmployer() + lineSeparator() +
+                "Location: " + getLocation() + lineSeparator() +
+                "Position Type: " + getPositionType() + lineSeparator() +
+                "Core Competency: " + getCoreCompetency() + lineSeparator();
+    }
+
 }
 
     // TODO: Add two constructors - one to initialize a unique ID and a second to initialize the
@@ -104,4 +114,4 @@ public class Job {
 
     // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
     //  and id.
-}
+
